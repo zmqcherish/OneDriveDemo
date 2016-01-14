@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="OneDriveDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OneDriveDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <local:ItemTypeToImageConverter x:Key="ItemType2ImageConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Button Content="登陆" Click="btnLogin_Click" Margin="5"/>
+            <Button Content="上传" Click="btnUpload_Click" Margin="5"/>
+            <Button Content="下载" Click="btnDownload_Click" Margin="5"/>
+            <Button Content="返回" Click="btnBack_Click" Margin="5"/>
+            <TextBlock x:Name="txtMsg"/>
+        </StackPanel>
+        <GridView Grid.Row="1" x:Name="gridView" SelectionChanged="gridView_SelectionChanged">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Source="{Binding File,Converter={StaticResource ItemType2ImageConverter}}" Width="150" Height="150"/>
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>
